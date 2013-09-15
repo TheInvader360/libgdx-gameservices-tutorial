@@ -16,7 +16,6 @@
 
 package com.theinvader360.tutorial.libgdx.gameservices;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
@@ -27,17 +26,17 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 
 public class MainMenuScreen implements Screen {
-	Game game;
+	TutorialLibgdxGameservices game;
 
 	OrthographicCamera guiCam;
 	SpriteBatch batcher;
 	Rectangle soundBounds;
 	Rectangle playBounds;
 	Rectangle highscoresBounds;
-	Rectangle helpBounds;
+	Rectangle achievementsBounds;
 	Vector3 touchPoint;
 
-	public MainMenuScreen (Game game) {
+	public MainMenuScreen (TutorialLibgdxGameservices game) {
 		this.game = game;
 
 		guiCam = new OrthographicCamera(320, 480);
@@ -46,7 +45,7 @@ public class MainMenuScreen implements Screen {
 		soundBounds = new Rectangle(0, 0, 64, 64);
 		playBounds = new Rectangle(160 - 150, 200 + 18, 300, 36);
 		highscoresBounds = new Rectangle(160 - 150, 200 - 18, 300, 36);
-		helpBounds = new Rectangle(160 - 150, 200 - 18 - 36, 300, 36);
+		achievementsBounds = new Rectangle(160 - 150, 200 - 18 - 36, 300, 36);
 		touchPoint = new Vector3();
 	}
 
@@ -56,17 +55,20 @@ public class MainMenuScreen implements Screen {
 
 			if (OverlapTester.pointInRectangle(playBounds, touchPoint.x, touchPoint.y)) {
 				Assets.playSound(Assets.clickSound);
+				if (!game.actionResolver.getSignedInGPGS()) game.actionResolver.loginGPGS();
 				game.setScreen(new GameScreen(game));
 				return;
 			}
 			if (OverlapTester.pointInRectangle(highscoresBounds, touchPoint.x, touchPoint.y)) {
 				Assets.playSound(Assets.clickSound);
-				game.setScreen(new HighscoresScreen(game));
+				if (game.actionResolver.getSignedInGPGS()) game.actionResolver.getLeaderboardGPGS();
+				else game.actionResolver.loginGPGS();
 				return;
 			}
-			if (OverlapTester.pointInRectangle(helpBounds, touchPoint.x, touchPoint.y)) {
+			if (OverlapTester.pointInRectangle(achievementsBounds, touchPoint.x, touchPoint.y)) {
 				Assets.playSound(Assets.clickSound);
-				game.setScreen(new HelpScreen(game));
+				if (game.actionResolver.getSignedInGPGS()) game.actionResolver.getAchievementsGPGS();
+				else game.actionResolver.loginGPGS();
 				return;
 			}
 			if (OverlapTester.pointInRectangle(soundBounds, touchPoint.x, touchPoint.y)) {

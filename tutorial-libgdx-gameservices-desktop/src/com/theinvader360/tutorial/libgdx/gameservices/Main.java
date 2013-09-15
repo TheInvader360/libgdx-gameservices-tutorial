@@ -11,6 +11,6 @@ public class Main {
 		cfg.width = 320;
 		cfg.height = 480;
 		
-		new LwjglApplication(new TutorialLibgdxGameservices(), cfg);
+		new LwjglApplication(new TutorialLibgdxGameservices(new ActionResolverDesktop()), cfg);
 	}
 }

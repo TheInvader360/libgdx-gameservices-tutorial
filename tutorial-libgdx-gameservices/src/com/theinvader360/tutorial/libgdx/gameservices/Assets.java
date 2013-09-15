@@ -26,7 +26,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 public class Assets {
 	public static Texture background;
 	public static TextureRegion backgroundRegion;
-
 	public static Texture items;
 	public static TextureRegion mainMenu;
 	public static TextureRegion pauseMenu;
@@ -48,7 +47,6 @@ public class Assets {
 	public static TextureRegion platform;
 	public static Animation brakingPlatform;
 	public static BitmapFont font;
-
 	public static Music music;
 	public static Sound jumpSound;
 	public static Sound highJumpSound;

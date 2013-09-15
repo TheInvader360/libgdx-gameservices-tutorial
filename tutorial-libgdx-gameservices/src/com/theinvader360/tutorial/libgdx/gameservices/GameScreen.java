@@ -16,7 +16,6 @@
 
 package com.theinvader360.tutorial.libgdx.gameservices;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Application.ApplicationType;
 import com.badlogic.gdx.Input.Keys;
@@ -36,7 +35,7 @@ public class GameScreen implements Screen {
 	static final int GAME_LEVEL_END = 3;
 	static final int GAME_OVER = 4;
 
-	Game game;
+	TutorialLibgdxGameservices game;
 
 	int state;
 	OrthographicCamera guiCam;
@@ -51,7 +50,7 @@ public class GameScreen implements Screen {
 	int lastScore;
 	String scoreString;
 
-	public GameScreen (Game game) {
+	public GameScreen (TutorialLibgdxGameservices game) {
 		this.game = game;
 
 		state = GAME_READY;
@@ -186,6 +185,14 @@ public class GameScreen implements Screen {
 
 	private void updateGameOver () {
 		if (Gdx.input.justTouched()) {
+			if (game.actionResolver.getSignedInGPGS()) {
+				game.actionResolver.submitScoreGPGS(world.score);
+				if (world.score >= 100) game.actionResolver.unlockAchievementGPGS("CgkI6574wJUXEAIQAQ");
+				if (world.score >= 200) game.actionResolver.unlockAchievementGPGS("CgkI6574wJUXEAIQAg");
+				if (world.score >= 300) game.actionResolver.unlockAchievementGPGS("CgkI6574wJUXEAIQBA");
+				if (world.score >= 400) game.actionResolver.unlockAchievementGPGS("CgkI6574wJUXEAIQBQ");
+				if (world.score >= 500) game.actionResolver.unlockAchievementGPGS("CgkI6574wJUXEAIQBg");
+			}
 			game.setScreen(new MainMenuScreen(game));
 		}
 	}
