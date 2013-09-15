@@ -16,35 +16,28 @@
 
 package com.theinvader360.tutorial.libgdx.gameservices;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.FPSLogger;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
-public class TutorialLibgdxGameservices extends Game {
-	boolean firstTimeCreate = true;
-	FPSLogger fps;
+public class Animation {
+	public static final int ANIMATION_LOOPING = 0;
+	public static final int ANIMATION_NONLOOPING = 1;
 
-	@Override
-	public void create () {
-		Settings.load();
-		Assets.load();
-		setScreen(new MainMenuScreen(this));
-		fps = new FPSLogger();
-	}
-	
-	@Override
-	public void render() {
-		super.render();
-		fps.log();
+	final TextureRegion[] keyFrames;
+	final float frameDuration;
+
+	public Animation (float frameDuration, TextureRegion... keyFrames) {
+		this.frameDuration = frameDuration;
+		this.keyFrames = keyFrames;
 	}
 
-	/** {@link Game#dispose()} only calls {@link Screen#hide()} so you need to override {@link Game#dispose()} in order to call
-	 * {@link Screen#dispose()} on each of your screens which still need to dispose of their resources. SuperJumper doesn't
-	 * actually have such resources so this is only to complete the example. */
-	@Override
-	public void dispose () {
-		super.dispose();
+	public TextureRegion getKeyFrame (float stateTime, int mode) {
+		int frameNumber = (int)(stateTime / frameDuration);
 
-		getScreen().dispose();
+		if (mode == ANIMATION_NONLOOPING) {
+			frameNumber = Math.min(keyFrames.length - 1, frameNumber);
+		} else {
+			frameNumber = frameNumber % keyFrames.length;
+		}
+		return keyFrames[frameNumber];
 	}
 }

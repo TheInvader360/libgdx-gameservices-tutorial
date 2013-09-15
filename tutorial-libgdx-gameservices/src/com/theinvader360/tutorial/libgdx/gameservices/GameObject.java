@@ -16,15 +16,15 @@
 
 package com.theinvader360.tutorial.libgdx.gameservices;
 
-import android.os.Bundle;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
-import com.badlogic.gdx.backends.android.AndroidApplication;
+public class GameObject {
+	public final Vector2 position;
+	public final Rectangle bounds;
 
-public class MainActivity extends AndroidApplication {
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate (Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		initialize(new TutorialLibgdxGameservices(), false);
+	public GameObject (float x, float y, float width, float height) {
+		this.position = new Vector2(x, y);
+		this.bounds = new Rectangle(x - width / 2, y - height / 2, width, height);
 	}
 }

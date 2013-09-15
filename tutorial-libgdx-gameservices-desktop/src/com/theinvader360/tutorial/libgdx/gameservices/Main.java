@@ -8,8 +8,8 @@ public class Main {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "tutorial-libgdx-gameservices";
 		cfg.useGL20 = false;
-		cfg.width = 480;
-		cfg.height = 320;
+		cfg.width = 320;
+		cfg.height = 480;
 		
 		new LwjglApplication(new TutorialLibgdxGameservices(), cfg);
 	}

@@ -16,35 +16,19 @@
 
 package com.theinvader360.tutorial.libgdx.gameservices;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.FPSLogger;
+public class Coin extends GameObject {
+	public static final float COIN_WIDTH = 0.5f;
+	public static final float COIN_HEIGHT = 0.8f;
+	public static final int COIN_SCORE = 10;
 
-public class TutorialLibgdxGameservices extends Game {
-	boolean firstTimeCreate = true;
-	FPSLogger fps;
+	float stateTime;
 
-	@Override
-	public void create () {
-		Settings.load();
-		Assets.load();
-		setScreen(new MainMenuScreen(this));
-		fps = new FPSLogger();
-	}
-	
-	@Override
-	public void render() {
-		super.render();
-		fps.log();
+	public Coin (float x, float y) {
+		super(x, y, COIN_WIDTH, COIN_HEIGHT);
+		stateTime = 0;
 	}
 
-	/** {@link Game#dispose()} only calls {@link Screen#hide()} so you need to override {@link Game#dispose()} in order to call
-	 * {@link Screen#dispose()} on each of your screens which still need to dispose of their resources. SuperJumper doesn't
-	 * actually have such resources so this is only to complete the example. */
-	@Override
-	public void dispose () {
-		super.dispose();
-
-		getScreen().dispose();
+	public void update (float deltaTime) {
+		stateTime += deltaTime;
 	}
 }

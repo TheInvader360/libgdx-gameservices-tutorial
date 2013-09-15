@@ -16,15 +16,10 @@
 
 package com.theinvader360.tutorial.libgdx.gameservices;
 
-import android.os.Bundle;
+import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 
-import com.badlogic.gdx.backends.android.AndroidApplication;
-
-public class MainActivity extends AndroidApplication {
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate (Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		initialize(new TutorialLibgdxGameservices(), false);
+public class TutorialLibgdxGameservicesDesktop {
+	public static void main (String[] argv) {
+		new LwjglApplication(new TutorialLibgdxGameservices(), "Tutorial - LibGDX Game Services", 320, 480, false);
 	}
 }

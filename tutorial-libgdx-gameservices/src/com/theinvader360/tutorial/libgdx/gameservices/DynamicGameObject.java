@@ -16,15 +16,15 @@
 
 package com.theinvader360.tutorial.libgdx.gameservices;
 
-import android.os.Bundle;
+import com.badlogic.gdx.math.Vector2;
 
-import com.badlogic.gdx.backends.android.AndroidApplication;
+public class DynamicGameObject extends GameObject {
+	public final Vector2 velocity;
+	public final Vector2 accel;
 
-public class MainActivity extends AndroidApplication {
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate (Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		initialize(new TutorialLibgdxGameservices(), false);
+	public DynamicGameObject (float x, float y, float width, float height) {
+		super(x, y, width, height);
+		velocity = new Vector2();
+		accel = new Vector2();
 	}
 }

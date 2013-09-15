@@ -16,35 +16,22 @@
 
 package com.theinvader360.tutorial.libgdx.gameservices;
 
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.FPSLogger;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
-public class TutorialLibgdxGameservices extends Game {
-	boolean firstTimeCreate = true;
-	FPSLogger fps;
-
-	@Override
-	public void create () {
-		Settings.load();
-		Assets.load();
-		setScreen(new MainMenuScreen(this));
-		fps = new FPSLogger();
-	}
-	
-	@Override
-	public void render() {
-		super.render();
-		fps.log();
+public class OverlapTester {
+	public static boolean overlapRectangles (Rectangle r1, Rectangle r2) {
+		if (r1.x < r2.x + r2.width && r1.x + r1.width > r2.x && r1.y < r2.y + r2.height && r1.y + r1.height > r2.y)
+			return true;
+		else
+			return false;
 	}
 
-	/** {@link Game#dispose()} only calls {@link Screen#hide()} so you need to override {@link Game#dispose()} in order to call
-	 * {@link Screen#dispose()} on each of your screens which still need to dispose of their resources. SuperJumper doesn't
-	 * actually have such resources so this is only to complete the example. */
-	@Override
-	public void dispose () {
-		super.dispose();
+	public static boolean pointInRectangle (Rectangle r, Vector2 p) {
+		return r.x <= p.x && r.x + r.width >= p.x && r.y <= p.y && r.y + r.height >= p.y;
+	}
 
-		getScreen().dispose();
+	public static boolean pointInRectangle (Rectangle r, float x, float y) {
+		return r.x <= x && r.x + r.width >= x && r.y <= y && r.y + r.height >= y;
 	}
 }
