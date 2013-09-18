@@ -4,6 +4,6 @@ The game itself is one of the example applications included with LibGDX (Super J
 
 Open source and available on GitHub - [https://github.com/TheInvader360](https://github.com/TheInvader360)
 
-Companion tutorial on the blog - [http://theinvader360.blogspot.co.uk](http://theinvader360.blogspot.co.uk)
+Companion tutorial on the blog - [http://theinvader360.blogspot.co.uk](http://theinvader360.blogspot.co.uk) (COMING SOON!)
 
 Play a more complete version of the game (Super Jump a Doodle): [https://play.google.com/store/apps/details?id=com.theinvader360.jumping.superjumpadoodle.free](https://play.google.com/store/apps/details?id=com.theinvader360.jumping.superjumpadoodle.free)
