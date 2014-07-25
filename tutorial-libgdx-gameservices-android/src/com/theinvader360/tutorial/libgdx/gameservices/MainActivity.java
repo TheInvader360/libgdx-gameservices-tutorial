@@ -20,23 +20,22 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
+import com.google.android.gms.games.Games;
 import com.google.example.games.basegameutils.GameHelper;
 import com.google.example.games.basegameutils.GameHelper.GameHelperListener;
 
 public class MainActivity extends AndroidApplication implements GameHelperListener, ActionResolver {
 	private GameHelper gameHelper;
 
-	public MainActivity(){
-		gameHelper = new GameHelper(this);
-		gameHelper.enableDebugLog(true, "GPGS");
-	}
-	
-	/** Called when the activity is first created. */
 	@Override
 	public void onCreate (Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		initialize(new TutorialLibgdxGameservices(this), false);
-		gameHelper.setup(this);
+    if (gameHelper == null) {
+      gameHelper = new GameHelper(this, GameHelper.CLIENT_GAMES);
+      gameHelper.enableDebugLog(true);
+    }
+    gameHelper.setup(this);
 	}
 
 	@Override
@@ -76,22 +75,32 @@ public class MainActivity extends AndroidApplication implements GameHelperListen
 
 	@Override
 	public void submitScoreGPGS(int score) {
-		gameHelper.getGamesClient().submitScore("CgkI6574wJUXEAIQBw", score);
+		Games.Leaderboards.submitScore(gameHelper.getApiClient(), "CgkI6574wJUXEAIQBw", score);
 	}
 	
 	@Override
 	public void unlockAchievementGPGS(String achievementId) {
-		gameHelper.getGamesClient().unlockAchievement(achievementId);
+	  Games.Achievements.unlock(gameHelper.getApiClient(), achievementId);
 	}
 	
 	@Override
 	public void getLeaderboardGPGS() {
-		startActivityForResult(gameHelper.getGamesClient().getLeaderboardIntent("CgkI6574wJUXEAIQBw"), 100);
+	  if (gameHelper.isSignedIn()) {
+	    startActivityForResult(Games.Leaderboards.getLeaderboardIntent(gameHelper.getApiClient(), "CgkI6574wJUXEAIQBw"), 100);
+	  }
+	  else if (!gameHelper.isConnecting()) {
+	    loginGPGS();
+	  }
 	}
 
 	@Override
 	public void getAchievementsGPGS() {
-		startActivityForResult(gameHelper.getGamesClient().getAchievementsIntent(), 101);
+	  if (gameHelper.isSignedIn()) {
+	    startActivityForResult(Games.Achievements.getAchievementsIntent(gameHelper.getApiClient()), 101);
+	  }
+	  else if (!gameHelper.isConnecting()) {
+	    loginGPGS();
+	  }
 	}
 	
 	@Override
