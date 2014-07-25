@@ -4,9 +4,10 @@
 	<classpathentry kind="src" path="gen"/>
 	<classpathentry combineaccessrules="false" exported="true" kind="src" path="/tutorial-libgdx-gameservices"/>
 	<classpathentry kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
-	<classpathentry kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="lib" path="/tutorial-libgdx-gameservices/libs/gdx.jar" sourcepath="/tutorial-libgdx-gameservices/libs/gdx-sources.jar"/>
 	<classpathentry exported="true" kind="lib" path="libs/gdx-backend-android.jar" sourcepath="libs/gdx-backend-android-sources.jar"/>
 	<classpathentry kind="src" path="/BaseGameUtils"/>
+	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
